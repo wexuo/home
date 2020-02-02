@@ -29,4 +29,4 @@
 <input type="checkbox" checked> layer 弹出层
 
 
-![](https://cdn.jsdelivr.net/gh/laoxuai/images/image/20200202160543.png)
+![](https://images.gitee.com/uploads/images/2020/0202/163553_86df929c_4982001.png)
