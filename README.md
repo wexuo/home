@@ -2,7 +2,7 @@
 
 好看的个人主页，个人主页源码，博客主页模板
 
-![](https://cdn.jsdelivr.net/gh/laoxuai/images/image/20200202160543.png)
+预览地址：[https://laoxuai.github.io](https://laoxuai.github.io)
 
 
 ## 集成插件
@@ -21,10 +21,12 @@
 ## 集成API
 
 <input type="checkbox" checked> [一言](https://hitokoto.cn/)
-
 <input type="checkbox" checked> [今日诗词](https://www.jinrishici.com/)
 
 ## 使用到的技术
 <input type="checkbox" checked> Github 图床
 <input type="checkbox" checked> fontawesome
 <input type="checkbox" checked> layer 弹出层
+
+
+![](https://cdn.jsdelivr.net/gh/laoxuai/images/image/20200202160543.png)
