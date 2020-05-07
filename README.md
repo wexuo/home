@@ -2,31 +2,33 @@
 
 好看的个人主页，个人主页源码，博客主页模板
 
-预览地址：[https://laoxuai.github.io](https://laoxuai.github.io)
+预览地址：[https://laoxuai.github.io/home](https://laoxuai.github.io/home)
 
+国内地址：[https://laoxuai.gitee.io/home](https://laoxuai.gitee.io/home)
 
 ## 集成插件
 
-<input type="checkbox" checked> [typed 打字机特效](https://github.com/mattboldt/typed.js/)
-
-<input type="checkbox" checked> [Aplayer 音乐播放插件](https://github.com/MoePlayer/APlayer)
-
-
-<input type="checkbox" checked> [Meting 强大的 Aplayer 辅助插件](https://github.com/metowolf/MetingJS)
-
-<input type="checkbox" checked> [不蒜子计数](http://busuanzi.ibruce.info/)
-
-<input type="checkbox" checked> [Markdown 在线排版](https://pandao.github.io/editor.md/)
+- [x] [typed 打字机特效](https://github.com/mattboldt/typed.js/)
+- [x] [Aplayer 音乐播放插件](https://github.com/MoePlayer/APlayer)
+- [x] [Meting 强大的 Aplayer 辅助插件](https://github.com/metowolf/MetingJS)
+- [x] [不蒜子计数](http://busuanzi.ibruce.info/)
+- [x] [Markdown 在线排版](https://pandao.github.io/editor.md/)
 
 ## 集成API
 
-<input type="checkbox" checked> [一言](https://hitokoto.cn/)
-<input type="checkbox" checked> [今日诗词](https://www.jinrishici.com/)
+- [x] [一言](https://hitokoto.cn/)
+- [x] [今日诗词](https://www.jinrishici.com/)
+- [x] [随机图片](https://api.ixiaowai.cn/api/api.php) 
+
+## 好玩的
+
+- [x] 点击冒点
+- [x] 雪花
+- [x] 搞怪标题栏 
 
 ## 使用到的技术
-<input type="checkbox" checked> Github 图床
-<input type="checkbox" checked> fontawesome
-<input type="checkbox" checked> layer 弹出层
+- [x] Github 图床
+- [x] fontawesome
 
 
-![](https://images.gitee.com/uploads/images/2020/0202/163553_86df929c_4982001.png)
+![](https://cdn.jsdelivr.net/gh/laoxuai/images/image/1588860848951.png)
