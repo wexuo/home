@@ -2,7 +2,7 @@
 
 好看的个人主页，个人主页源码，博客主页模板
 
-预览地址：[https://xiaoxua.gitee.io/home](https://xiaoxua.gitee.io/home)
+预览地址：[https://laoxuai.gitee.io/home](https://laoxuai.gitee.io/home)
 
 ## 集成插件
 
