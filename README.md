@@ -1,8 +1,8 @@
 ## 个人主页
 
-好看的个人主页，个人主页源码，博客主页模板
+好看的个人主页，个人主页源码，博客主页模板.**🉑️随意使用，无限制。**
 
-预览地址：[https://laoxuai.gitee.io/home](https://laoxuai.gitee.io/home)
+预览地址：[https://laoxuai.github.io/home](https://laoxuai.github.io/home)
 
 ## 集成插件
 
@@ -10,7 +10,6 @@
 - [x] [Aplayer 音乐播放插件](https://github.com/MoePlayer/APlayer)
 - [x] [Meting 强大的 Aplayer 辅助插件](https://github.com/metowolf/MetingJS)
 - [x] [不蒜子计数](http://busuanzi.ibruce.info/)
-- [x] [Markdown 在线排版](https://pandao.github.io/editor.md/)
 
 ## 集成API
 
@@ -23,10 +22,3 @@
 - [x] 点击冒点
 - [x] 雪花
 - [x] 搞怪标题栏 
-
-## 使用到的技术
-- [x] Github 图床
-- [x] fontawesome
-
-
-![](https://cdn.jsdelivr.net/gh/laoxuai/images/image/1588860848951.png)
