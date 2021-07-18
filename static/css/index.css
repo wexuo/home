@@ -70,7 +70,6 @@ strong{
 }
 #nav {
     position: relative;
-    margin-bottom: 1rem;
     margin-top: -2rem;
     width: 100%;
     background-color: #49b1f5;
@@ -114,20 +113,20 @@ h1 {
     -webkit-box-align: start;
     align-items: flex-start;
     margin: 0 auto;
-    padding: 0 15px;
-    max-width: 1200px;
+    padding: 0 5px;
+    max-width: 1400px;
 }
 
 #page{
-    margin-top: 20px;
+    margin-top: 10px;
     width: 75%;
-    border-radius: 8px;
+    border-radius: 3px;
     background: #fff;
     box-shadow: 0 4px 8px 6px rgba(7, 17, 27, .06);
     transition: all .3s;
 }
 #page{
-    padding: 40px 44px 44px;
+    padding: 20px 44px 44px;
 }
 
 #aside_content {
@@ -135,8 +134,8 @@ h1 {
 }
 #aside_content .card-widget {
     overflow: hidden;
-    margin-top: 20px;
-    border-radius: 8px;
+    margin: 10px 0;
+    border-radius: 3px;
     background: #fff;
     -webkit-box-shadow: 0 4px 8px 6px rgba(7, 17, 27, .06);
     box-shadow: 0 4px 8px 6px rgba(7, 17, 27, .06);
