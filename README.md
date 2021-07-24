@@ -10,6 +10,7 @@
 - [x] [Aplayer 音乐播放插件](https://github.com/MoePlayer/APlayer)
 - [x] [Meting 强大的 Aplayer 辅助插件](https://github.com/metowolf/MetingJS)
 - [x] [不蒜子计数](http://busuanzi.ibruce.info/)
+- [x] [看板娘](https://github.com/stevenjoezhang/live2d-widget)
 
 ## 集成API
 
