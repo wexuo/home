@@ -108,7 +108,7 @@
 
                         <h2>技能</h2>
                         <div class="skillbox">
-                            <div class="skillbar">
+                            <!-- <div class="skillbar">
                                 <div class="skillbar-title"
                                     style="background: linear-gradient(to right, #FF0066 0%, #FF00CC 100%); width: 75%">
                                     <span>Java</span>
@@ -156,7 +156,7 @@
                                     <span>数据结构与算法</span>
                                 </div>
                                 <div class="skill-bar-percent">75%</div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <hr>
@@ -179,7 +179,7 @@
         </main>
         <footer id="footer">
             <div id="footer-wrap">
-                <div class="copyright">&copy;2019 - 2021 BY Bucaicai</div>
+                <div class="copyright">Create by Bucaicai, modify by Starxchina.</div>
             </div>
         </footer>
     </div>
@@ -277,6 +277,34 @@
             }
         });
     </script> -->
+
+
+    <!-- <div class="skillbar">
+        <div class="skillbar-title"
+            style="background: linear-gradient(to right, #2196F3 0%, #42A5F5 100%); width: 60%">
+            <span>Spring</span>
+        </div>
+        <div class="skill-bar-percent">60%</div>
+    </div> -->
+    <!-- 导入技能项 -->
+    <script>
+        var jsondata='{"Python": ["75%", "#FF0066", "#FF00CC"], "Pytorch": ["90%", "#9900FF", "#CC66FF"], "数据库": ["75%", "#2196F3", "#42A5F5"]}';
+        var skill_items = JSON.parse(jsondata);
+        // var raw_data = '';
+        // console.log(skill_items.length);
+        for (var it in skill_items) {
+            // console.log("Hello, {0}!".format("World"))
+            // var raw_data = '<div class="skillbar"><div class="skillbar-title" style="background: linear-gradient(to right, {0} 0%, {1} 100%); width: {2}"><span>{3}</span></div><div class="skill-bar-percent">{2}</div></div>'.format(skill_items[it][1], skill_items[it][2], skill_items[it][0], it);
+
+            var raw_data = '';
+            raw_data += '<div class="skillbar"><div class="skillbar-title" style="background: linear-gradient(to right, ' + skill_items[it][1] + ' 0%, ' + skill_items[it][2] + ' 100%); width: ' + skill_items[it][0] + '">';
+            raw_data += '<span>' + it + '</span>';
+            raw_data += '</div>';
+            raw_data += '<div class="skill-bar-percent">' + skill_items[it][0] + '</div></div>';
+            $(".skillbox").append(raw_data)
+            // console.log(raw_data)
+        }
+    </script>
 </body>
 
 </html>
