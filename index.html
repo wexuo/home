@@ -11,6 +11,7 @@
     <meta name="format-detection" content="telephone=no">
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="static/css/index.css">
+    <!-- 标题(eg.今日诗词)的icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery.fancybox@2.1.5/source/jquery.fancybox.css">
     <script type="text/javascript">
@@ -73,6 +74,7 @@
                     <div class="card-widget card-announcement">
                         <div class="card-content">
                             <div class="item-headline">
+                                <!-- i标签标示斜体 -->
                                 <i class="fa fa-calendar" aria-hidden="true"></i>
                                 <span>今日诗词</span>
                             </div>
@@ -98,67 +100,31 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <!-- <div class="card-widget card-announcement">
+                        <div class="card-content">
+                            <div class="item-headline">
+                                i标签标示斜体
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                <span>地图</span>
+                            </div>
+                            <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=m&d=fxHMyTuzNRKDwSXm0QvMobKSPwTIC-uCUHO--EUMnJw"></script>
+                        </div>
+                    </div> -->
+                <div>
+                    <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=m&d=fxHMyTuzNRKDwSXm0QvMobKSPwTIC-uCUHO--EUMnJw"></script>
+                </div>
+
                 </div>
                 <article id="page">
                     <div class="article-container">
                         <h2>音乐</h2>
-                        <meting-js auto="https://y.qq.com/n/ryqq/playlist/8330293188.html">
-                            <!-- https://y.qq.com/n/yqq/playlist/7713574197.html -->
-                        </meting-js>
+                        <meting-js auto="https://y.qq.com/n/ryqq/playlist/8330293188.html"></meting-js>
                         <hr>
 
                         <h2>技能</h2>
-                        <div class="skillbox">
-                            <!-- <div class="skillbar">
-                                <div class="skillbar-title"
-                                    style="background: linear-gradient(to right, #FF0066 0%, #FF00CC 100%); width: 75%">
-                                    <span>Java</span>
-                                </div>
-                                <div class="skill-bar-percent">75%</div>
-                            </div>
-                            <div class="skillbar">
-                                <div class="skillbar-title"
-                                    style="background: linear-gradient(to right, #9900FF 0%, #CC66FF 100%); width: 40%">
-                                    <span>前端</span>
-                                </div>
-                                <div class="skill-bar-percent">40%</div>
-                            </div>
-                            <div class="skillbar">
-                                <div class="skillbar-title"
-                                    style="background: linear-gradient(to right, #2196F3 0%, #42A5F5 100%); width: 60%">
-                                    <span>Spring</span>
-                                </div>
-                                <div class="skill-bar-percent">60%</div>
-                            </div>
-                            <div class="skillbar">
-                                <div class="skillbar-title"
-                                    style="background: linear-gradient(to right, #00BCD4 0%, #80DEEA 100%); width: 70%">
-                                    <span>SpringMVC</span>
-                                </div>
-                                <div class="skill-bar-percent">70%</div>
-                            </div>
-                            <div class="skillbar">
-                                <div class="skillbar-title"
-                                    style="background: linear-gradient(to right, #00BCD4 0%, #f54009 100%); width: 80%">
-                                    <span>SpringBoot</span>
-                                </div>
-                                <div class="skill-bar-percent">80%</div>
-                            </div>
-                            <div class="skillbar">
-                                <div class="skillbar-title"
-                                    style="background: linear-gradient(to right, #4CAF50 0%, #81C784 100%); width: 60%">
-                                    <span>Mybatis</span>
-                                </div>
-                                <div class="skill-bar-percent">60%</div>
-                            </div>
-                            <div class="skillbar">
-                                <div class="skillbar-title"
-                                    style="background: linear-gradient(to right, #FFEB3B 0%, #FFF176 100%); width: 75%">
-                                    <span>数据结构与算法</span>
-                                </div>
-                                <div class="skill-bar-percent">75%</div>
-                            </div> -->
-                        </div>
+                        <div class="skillbox"></div>
 
                         <hr>
                         <h2>刷题</h2>
@@ -203,107 +169,23 @@
     <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
     <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
 
-    <!-- 看板娘 -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
-    <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script> -->
+    <!-- 地图显示 -->
+    <!-- <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=m&d=fxHMyTuzNRKDwSXm0QvMobKSPwTIC-uCUHO--EUMnJw"></script> -->
 
     <!--鼠标点击效果-->
     <script src="https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@3.0.8/js/maodian.js"></script>
 
-    <!-- 雪花相关 -->
-    <!-- <script type="text/javascript">
-        console.clear();
-        console.log("%c 有朋自远方来, 不亦说乎.", "background:#24272A; color:#ffffff", "");
-        console.log("%c Github %c", "background:#24272A; color:#ffffff", "", "https://github.com/laoxuai");
-        console.log("%c 版本号: %c", "background:#24272A; color:#ffffff", "", "1.0.0");
-
-
-        (function ($) {
-            $.fn.snow = function (options) {
-                var $flake = $('<div id="snowbox" />').css({ 'position': 'absolute', 'z-index': '9999', 'top': '-50px' }).html('&#10052;'),
-                    documentHeight = $(document).height(),
-                    documentWidth = $(document).width(),
-                    defaults = {
-                        minSize: 10,
-                        maxSize: 20,
-                        newOn: 1000,
-                        flakeColor: "#AFDAEF" /* 此处可以定义雪花颜色，若要白色可以改为#FFFFFF */
-                    },
-                    options = $.extend({}, defaults, options);
-                var interval = setInterval(function () {
-                    var startPositionLeft = Math.random() * documentWidth - 100,
-                        startOpacity = 0.5 + Math.random(),
-                        sizeFlake = options.minSize + Math.random() * options.maxSize,
-                        endPositionTop = documentHeight - 200,
-                        endPositionLeft = startPositionLeft - 500 + Math.random() * 500,
-                        durationFall = documentHeight * 10 + Math.random() * 5000;
-                    $flake.clone().appendTo('body').css({
-                        left: startPositionLeft,
-                        opacity: startOpacity,
-                        'font-size': sizeFlake,
-                        color: options.flakeColor
-                    }).animate({
-                        top: endPositionTop,
-                        left: endPositionLeft,
-                        opacity: 0.2
-                    }, durationFall, 'linear', function () {
-                        $(this).remove()
-                    });
-                }, options.newOn);
-            };
-        })(jQuery);
-        $(function () {
-            $.fn.snow({
-                minSize: 5, /* 定义雪花最小尺寸 */
-                maxSize: 50,/* 定义雪花最大尺寸 */
-                newOn: 800  /* 定义密集程度，数字越小越密集 */
-            });
-        });
-
-        // 浏览器搞笑标题
-        var OriginTitle = document.title;
-        var titleTime;
-        document.addEventListener('visibilitychange', function () {
-            if (document.hidden) {
-                // $('[rel="icon"]').attr('href', "/funny.ico");
-                document.title = '╭(°A°`)╮ 页面崩溃啦 ~';
-                clearTimeout(titleTime);
-            }
-            else {
-                $('[rel="icon"]').attr('href', "/favicon.ico");
-                document.title = '(ฅ>ω<*ฅ) 噫又好啦 ~' + OriginTitle;
-                titleTime = setTimeout(function () {
-                    document.title = OriginTitle;
-                }, 2000);
-            }
-        });
-    </script> -->
-
-
-    <!-- <div class="skillbar">
-        <div class="skillbar-title"
-            style="background: linear-gradient(to right, #2196F3 0%, #42A5F5 100%); width: 60%">
-            <span>Spring</span>
-        </div>
-        <div class="skill-bar-percent">60%</div>
-    </div> -->
     <!-- 导入技能项 -->
     <script>
-        var jsondata='{"Python": ["75%", "#FF0066", "#FF00CC"], "Pytorch": ["90%", "#9900FF", "#CC66FF"], "数据库": ["75%", "#2196F3", "#42A5F5"]}';
+        var jsondata = '{"Python": ["75%", "#FF0066", "#FF00CC"], "Pytorch": ["90%", "#9900FF", "#CC66FF"], "数据库": ["75%", "#2196F3", "#42A5F5"]}';
         var skill_items = JSON.parse(jsondata);
-        // var raw_data = '';
-        // console.log(skill_items.length);
         for (var it in skill_items) {
-            // console.log("Hello, {0}!".format("World"))
-            // var raw_data = '<div class="skillbar"><div class="skillbar-title" style="background: linear-gradient(to right, {0} 0%, {1} 100%); width: {2}"><span>{3}</span></div><div class="skill-bar-percent">{2}</div></div>'.format(skill_items[it][1], skill_items[it][2], skill_items[it][0], it);
-
             var raw_data = '';
             raw_data += '<div class="skillbar"><div class="skillbar-title" style="background: linear-gradient(to right, ' + skill_items[it][1] + ' 0%, ' + skill_items[it][2] + ' 100%); width: ' + skill_items[it][0] + '">';
             raw_data += '<span>' + it + '</span>';
             raw_data += '</div>';
             raw_data += '<div class="skill-bar-percent">' + skill_items[it][0] + '</div></div>';
             $(".skillbox").append(raw_data)
-            // console.log(raw_data)
         }
     </script>
 </body>
