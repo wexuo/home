@@ -1,6 +1,10 @@
 ﻿* {
     box-sizing: border-box;
 }
+a {
+    text-decoration: none;
+}
+
 html {
     height: 100%;
 }
@@ -246,6 +250,10 @@ aside_content .card-info .author-info__description {
 }
 #aside_content .item-headline span {
     margin-left: .5rem;
+}
+
+#aside_content .global-map {
+    margin: 0 auto;
 }
 
 #aside_content .card-webinfo .webinfo {
