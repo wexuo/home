@@ -1,279 +1,542 @@
-﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
-    <title>不才才 bucaicai</title>
-    <meta name="description" content="95后青年，后端开发者，略懂前端, 学生，实习，缺乏社会的毒打">
-    <meta name="keywords" content="Java,Spring,个人博客，微信小程序，博客">
-    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>未寻 | Senior Backend Engineer</title>
+    <meta name="description" content="资深后端工程师，专注于高并发、分布式系统架构设计">
+    <meta name="keywords" content="Java,Go,Python,微服务,分布式,架构师">
+    <meta name="theme-color" content="#0d1117">
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="static/css/index.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery.fancybox@2.1.5/source/jquery.fancybox.css">
-    <script type="text/javascript">
-        if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
-            alert('朋友，上古浏览器不支持呢~');
-        }
-    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
 </head>
 
 <body>
-    <div id="body-wrap">
-        <nav class="not_index_bg" id="nav" style="background-image:url(https://api.ixiaowai.cn/api/api.php)">
-            <div id="page_site-info">
-                <div id="site-title">
-                    <span class="blogtitle"></span>
-                    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-                    <script>
-                        var typed = new Typed(".blogtitle", {
-                            strings: ['求知若饥，虚心若愚', 'Stay Hungry Stay Foolish'],
-                            startDelay: 300,
-                            typeSpeed: 100,
-                            loop: true,
-                            backSpeed: 50,
-                            showCursor: true
-                        });
-                    </script>
+    <div id="app">
+        <canvas ref="particles"></canvas>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+
+        <div class="app-container">
+            <!-- 导航栏 -->
+            <nav class="navbar">
+                <div class="nav-brand">&lt;/&gt; {{ site.name }}</div>
+                <div class="nav-links">
+                    <a v-for="link in navLinks" :key="link.id" :href="'#' + link.id">{{ link.title }}</a>
                 </div>
-            </div>
-        </nav>
-        <main id="content-outer">
-            <div class="layout_page" id="content-inner">
-                <div class="aside_content" id="aside_content">
-                    <div class="card-widget card-info">
-                        <div class="card-content">
-                            <div class="card-info-avatar is-center">
-                                <img class="avatar-img"
-                                    src="https://cdn.jsdelivr.net/gh/laoxuai/assert/images/20200125221102.png"
-                                    alt="avatar">
-                                <div class="author-info__name">Bucaicai</div>
-                                <div class="author-info__description">95后青年，后端开发者，略懂前端, <s>学生，实习</s>，缺乏社会的毒打</div>
-                            </div>
-                            <div class="card-info-social-icons is-center">
-                                <a class="social-icon" href="https://github.com/laoxuai" target="_blank">
-                                    <i class="fa fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+            </nav>
 
-                    <div class="card-widget card-announcement">
-                        <div class="card-content">
-                            <div class="item-headline">
-                                <i class="fa fa-bullhorn" aria-hidden="true"></i>
-                                <span>一言</span>
-                            </div>
-                            <div id="hitokoto"></div>
-                        </div>
+            <!-- Hero -->
+            <header class="hero">
+                <div class="hero-content">
+                    <div class="avatar-container">
+                        <img :src="profile.avatar" :alt="profile.name" class="avatar">
                     </div>
-                    <div class="card-widget card-announcement">
-                        <div class="card-content">
-                            <div class="item-headline">
-                                <i class="fa fa-calendar" aria-hidden="true"></i>
-                                <span>今日诗词</span>
-                            </div>
-                            <div id="jinrishici-sentence"></div>
-                        </div>
-                    </div>
-
-                    <div class="card-widget card-webinfo">
-                        <div class="card-content">
-                            <div class="item-headline">
-                                <i class="fa fa-line-chart" aria-hidden="true"></i>
-                                <span>站点信息</span>
-                            </div>
-                            <div class="webinfo">
-                                <div class="webinfo-item">
-                                    <div class="webinfo-site-uv-name">本站访客数 :</div>
-                                    <div class="webinfo-site-uv-count" id="busuanzi_value_site_uv"></div>
-                                </div>
-                                <div class="webinfo-item">
-                                    <div class="webinfo-site-name">本站总访问量 :</div>
-                                    <div class="webinfo-site-pv-count" id="busuanzi_value_site_pv"></div>
-                                </div>
-                            </div>
-                        </div>
+                    <h1 class="title">
+                        <span>{{ typedText }}</span><span class="cursor">|</span>
+                    </h1>
+                    <p class="subtitle">{{ profile.title }}</p>
+                    <p class="bio">{{ profile.bio }}</p>
+                    <div class="social-links">
+                        <a v-for="social in socialLinks" :key="social.name" :href="social.url" target="_blank"
+                            class="social-link" :title="social.name">
+                            <i :class="social.icon"></i>
+                        </a>
                     </div>
                 </div>
-                <article id="page">
-                    <div class="article-container">
-                        <h2>音乐</h2>
-                        <meting-js auto="https://y.qq.com/n/yqq/playlist/7713574197.html">
-                        </meting-js>
-                        <hr>
+            </header>
 
-                        <h2>技能</h2>
-                        <div class="skillbox">
-                            <div class="skillbar">
-                                <div class="skillbar-title"
-                                    style="background: linear-gradient(to right, #FF0066 0%, #FF00CC 100%); width: 75%">
-                                    <span>Java</span>
-                                </div>
-                                <div class="skill-bar-percent">75%</div>
-                            </div>
-                            <div class="skillbar">
-                                <div class="skillbar-title"
-                                    style="background: linear-gradient(to right, #9900FF 0%, #CC66FF 100%); width: 40%">
-                                    <span>前端</span>
-                                </div>
-                                <div class="skill-bar-percent">40%</div>
-                            </div>
-                            <div class="skillbar">
-                                <div class="skillbar-title"
-                                    style="background: linear-gradient(to right, #2196F3 0%, #42A5F5 100%); width: 60%">
-                                    <span>Spring</span>
-                                </div>
-                                <div class="skill-bar-percent">60%</div>
-                            </div>
-                            <div class="skillbar">
-                                <div class="skillbar-title"
-                                    style="background: linear-gradient(to right, #00BCD4 0%, #80DEEA 100%); width: 70%">
-                                    <span>SpringMVC</span>
-                                </div>
-                                <div class="skill-bar-percent">70%</div>
-                            </div>
-                            <div class="skillbar">
-                                <div class="skillbar-title"
-                                    style="background: linear-gradient(to right, #00BCD4 0%, #f54009 100%); width: 80%">
-                                    <span>SpringBoot</span>
-                                </div>
-                                <div class="skill-bar-percent">80%</div>
-                            </div>
-                            <div class="skillbar">
-                                <div class="skillbar-title"
-                                    style="background: linear-gradient(to right, #4CAF50 0%, #81C784 100%); width: 60%">
-                                    <span>Mybatis</span>
-                                </div>
-                                <div class="skill-bar-percent">60%</div>
-                            </div>
-                            <div class="skillbar">
-                                <div class="skillbar-title"
-                                    style="background: linear-gradient(to right, #FFEB3B 0%, #FFF176 100%); width: 75%">
-                                    <span>数据结构与算法</span>
-                                </div>
-                                <div class="skill-bar-percent">75%</div>
-                            </div>
-                        </div>
-
-                        <hr>
-                        <h2>刷题</h2>
-                        <div class="tool">
-                            <a href="https://leetcode-cn.com/problemset/all/" target="_blank">Leetcode</a><br>
-                            <a href="https://www.nowcoder.com/ta/coding-interviews" target="_blank">剑指 Offer</a>
-                        </div>
-
-                        <hr>
-                        <h2>收藏</h2>
-                        <div class="tool">
-                            <a href="http://tooool.org/" target="_blank" rel="noopener noreferrer">程序员导航、</a>
-                            <a href="https://adzhp.cn/" target="_blank" rel="noopener noreferrer">爱达杂货铺、</a>
-                            <a href="http://ifeve.com/" target="_blank" rel="noopener noreferrer">并发编程网</a>
+            <main class="main-content">
+                <!-- About -->
+                <section id="about" class="section" :class="{ visible: visibleSections.about }">
+                    <div class="section-header">
+                        <i class="ri-user-star-line"></i>
+                        <h2>About Me</h2>
+                        <span class="section-line"></span>
+                    </div>
+                    <div class="about-intro">
+                        <p>{{ about.intro }}</p>
+                    </div>
+                    <div class="about-grid">
+                        <div v-for="card in about.cards" :key="card.title" class="about-card">
+                            <div class="about-icon"><i :class="card.icon"></i></div>
+                            <h3>{{ card.title }}</h3>
+                            <p>{{ card.desc }}</p>
                         </div>
                     </div>
-                </article>
-            </div>
-        </main>
-        <footer id="footer">
-            <div id="footer-wrap">
-                <div class="copyright">&copy;2019 - 2021 BY Bucaicai</div>
-            </div>
-        </footer>
+                    <div class="quote-box">
+                        <i class="ri-double-quotes-l"></i>
+                        <p>{{ hitokoto }}</p>
+                    </div>
+                </section>
+
+                <!-- Skills -->
+                <section id="skills" class="section" :class="{ visible: visibleSections.skills }">
+                    <div class="section-header">
+                        <i class="ri-stack-line"></i>
+                        <h2>Technology Stack</h2>
+                        <span class="section-line"></span>
+                    </div>
+                    <div class="tech-categories">
+                        <div v-for="category in skills" :key="category.name" class="tech-category">
+                            <h3><i :class="category.icon"></i> {{ category.name }}</h3>
+                            <div class="tech-items">
+                                <div v-for="item in category.items" :key="item.name" class="tech-item"
+                                    :data-level="item.level">
+                                    <span class="tech-name">{{ item.name }}</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-progress"
+                                            :style="{ width: visibleSections.skills ? item.level + '%' : 0 }"></div>
+                                    </div>
+                                    <span class="tech-level">{{ item.levelName }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Projects -->
+                <section id="projects" class="section" :class="{ visible: visibleSections.projects }">
+                    <div class="section-header">
+                        <i class="ri-folder-fill"></i>
+                        <h2>Core Projects</h2>
+                        <span class="section-line"></span>
+                    </div>
+                    <div class="projects-grid">
+                        <div v-for="project in projects" :key="project.title" class="project-card">
+                            <div class="project-header">
+                                <i :class="project.icon"></i>
+                                <h3>{{ project.title }}</h3>
+                            </div>
+                            <p class="project-desc">{{ project.desc }}</p>
+                            <div class="project-tags">
+                                <span v-for="tag in project.tags" :key="tag">{{ tag }}</span>
+                            </div>
+                            <div class="project-metrics">
+                                <div v-for="metric in project.metrics" :key="metric.label" class="metric">
+                                    <span class="metric-value">{{ metric.value }}</span>
+                                    <span class="metric-label">{{ metric.label }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Experience -->
+                <section id="experience" class="section" :class="{ visible: visibleSections.experience }">
+                    <div class="section-header">
+                        <i class="ri-time-line"></i>
+                        <h2>Experience</h2>
+                        <span class="section-line"></span>
+                    </div>
+                    <div class="timeline">
+                        <div v-for="(item, index) in experience" :key="index" class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">{{ item.date }}</div>
+                                <h3>{{ item.title }}</h3>
+                                <p class="timeline-company">{{ item.company }}</p>
+                                <p class="timeline-desc">{{ item.desc }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Stats -->
+                <section id="stats" class="section section-stats" :class="{ visible: visibleSections.stats }">
+                    <div class="stats-grid">
+                        <div v-for="stat in stats" :key="stat.label" class="stat-item">
+                            <div class="stat-number">{{ stat.value }}</div>
+                            <div class="stat-label">{{ stat.label }}</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Poetry -->
+                <section id="poetry" class="section section-poetry" :class="{ visible: visibleSections.poetry }">
+                    <div class="poetry-box">
+                        <i class="ri-quill-pen-line"></i>
+                        <p>{{ poetry }}</p>
+                    </div>
+                </section>
+
+                <!-- Links -->
+                <section id="links" class="section" :class="{ visible: visibleSections.links }">
+                    <div class="section-header">
+                        <i class="ri-link"></i>
+                        <h2>Resources</h2>
+                        <span class="section-line"></span>
+                    </div>
+                    <div class="links-grid">
+                        <a v-for="link in resourceLinks" :key="link.name" :href="link.url" target="_blank"
+                            class="link-card">
+                            <i :class="link.icon"></i>
+                            <span>{{ link.name }}</span>
+                            <p>{{ link.desc }}</p>
+                        </a>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Footer -->
+            <footer id="contact" class="footer">
+                <div class="footer-content">
+                    <div class="footer-info">
+                        <h3>{{ site.name }}</h3>
+                        <p>{{ site.slogan }}</p>
+                    </div>
+                    <div class="footer-contact">
+                        <h4>Connect</h4>
+                        <div class="contact-items">
+                            <a v-for="social in socialLinks" :key="social.name" :href="social.url" target="_blank">
+                                <i :class="social.icon"></i> {{ social.name }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p class="copyright-main">&copy; 2019 - {{ currentYear }} {{ site.name }} · All Rights Reserved</p>
+                    <p class="copyright-sub">
+                        <span>Powered by Vue 3</span>
+                        <span class="divider">|</span>
+                        <span><a href="https://github.com/wexuo" target="_blank">GitHub</a></span>
+                        <span class="divider">|</span>
+                        <span>Made with <i class="ri-heart-fill"></i> in China</span>
+                    </p>
+                </div>
+            </footer>
+        </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery.fancybox@2.1.5/source/jquery.fancybox.js"></script>
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.js" type="module"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.0/lazysizes.min.js" async></script>
-    <!-- aplayer、meting -->
-    <!-- require APlayer -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-    <!-- require MetingJS -->
-    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
 
-    <!-- nplayer -->
-    <script src="https://unpkg.com/nplayer@latest/dist/index.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script>
+        const { createApp, ref, reactive, onMounted, computed } = Vue;
 
-    <!--   一言、今日诗词   -->
-    <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
-    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        createApp({
+            setup() {
+                // ===== 站点配置 =====
+                const site = reactive({
+                    name: '未寻',
+                    slogan: '探索未知，代码为舟'
+                });
 
-    <!-- 看板娘 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
-    <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+                // ===== 导航链接 =====
+                const navLinks = ref([
+                    { id: 'about', title: '关于' },
+                    { id: 'skills', title: '技术栈' },
+                    { id: 'projects', title: '项目' },
+                    { id: 'experience', title: '经历' },
+                    { id: 'contact', title: '联系' }
+                ]);
 
-    <!--鼠标点击效果-->
-    <script src="https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@3.0.8/js/maodian.js"></script>
+                // ===== 个人信息 =====
+                const profile = reactive({
+                    name: '未寻',
+                    avatar: 'https://cdn.jsdelivr.net/gh/laoxuai/assert/images/20200125221102.png',
+                    title: 'Senior Backend Engineer · System Architect',
+                    bio: '专注于高并发、高可用分布式系统架构设计，深耕 Java 生态，拥抱云原生技术'
+                });
 
-    <script type="text/javascript">
-        console.clear();
-        console.log("%c 有朋自远方来, 不亦说乎.", "background:#24272A; color:#ffffff", "");
-        console.log("%c Github %c", "background:#24272A; color:#ffffff", "", "https://github.com/laoxuai");
-        console.log("%c 版本号: %c", "background:#24272A; color:#ffffff", "", "1.0.0");
+                // ===== 社交链接 =====
+                const socialLinks = ref([
+                    { name: 'GitHub', icon: 'ri-github-fill', url: 'https://github.com/wexuo' },
+                    { name: 'Email', icon: 'ri-mail-fill', url: '#' },
+                    { name: '掘金', icon: 'ri-quill-pen-fill', url: '#' },
+                    { name: '知乎', icon: 'ri-zhihu-fill', url: '#' },
+                    { name: '微信', icon: 'ri-wechat-fill', url: '#' }
+                ]);
 
+                // ===== 关于我 =====
+                const about = reactive({
+                    intro: '资深后端工程师，拥有多年互联网研发经验。主导过多个核心业务系统的架构设计与落地实施，在高并发、分布式、微服务架构领域有深厚积累。',
+                    cards: [
+                        { icon: 'ri-code-s-slash-fill', title: '服务端开发', desc: '精通 Java，熟练掌握 Go、Python，具备多语言混合编程能力，专注于构建高性能服务端应用' },
+                        { icon: 'ri-cloud-fill', title: '微服务架构', desc: '精通 Spring Cloud / Dubbo 微服务体系，熟悉 Service Mesh，有大规模微服务治理与调优实战经验' },
+                        { icon: 'ri-database-2-fill', title: '数据架构', desc: '精通 MySQL 调优、Redis 缓存架构，熟悉 Elasticsearch、MongoDB、ClickHouse 等数据存储方案' },
+                        { icon: 'ri-route-fill', title: '分布式系统', desc: '熟悉分布式事务、分布式锁、一致性协议，有高并发系统设计与调优经验' },
+                        { icon: 'ri-layout-fill', title: '全栈能力', desc: '具备前端开发能力，熟练使用 Vue3、React、TypeScript，可独立完成全栈项目开发' },
+                        { icon: 'ri-smartphone-fill', title: '移动端开发', desc: '熟悉 uni-app 跨端开发框架，具备小程序、H5、App 多端统一开发能力' }
+                    ]
+                });
 
-        (function ($) {
-            $.fn.snow = function (options) {
-                var $flake = $('<div id="snowbox" />').css({ 'position': 'absolute', 'z-index': '9999', 'top': '-50px' }).html('&#10052;'),
-                    documentHeight = $(document).height(),
-                    documentWidth = $(document).width(),
-                    defaults = {
-                        minSize: 10,
-                        maxSize: 20,
-                        newOn: 1000,
-                        flakeColor: "#AFDAEF" /* 此处可以定义雪花颜色，若要白色可以改为#FFFFFF */
+                // ===== 技术栈 =====
+                const skills = ref([
+                    {
+                        name: '编程语言',
+                        icon: 'ri-code-s-fill',
+                        items: [
+                            { name: 'Java', level: 95, levelName: '精通' },
+                            { name: 'Python', level: 75, levelName: '熟练' },
+                            { name: 'Go', level: 65, levelName: '掌握' },
+                            { name: 'TypeScript', level: 65, levelName: '掌握' }
+                        ]
                     },
-                    options = $.extend({}, defaults, options);
-                var interval = setInterval(function () {
-                    var startPositionLeft = Math.random() * documentWidth - 100,
-                        startOpacity = 0.5 + Math.random(),
-                        sizeFlake = options.minSize + Math.random() * options.maxSize,
-                        endPositionTop = documentHeight - 200,
-                        endPositionLeft = startPositionLeft - 500 + Math.random() * 500,
-                        durationFall = documentHeight * 10 + Math.random() * 5000;
-                    $flake.clone().appendTo('body').css({
-                        left: startPositionLeft,
-                        opacity: startOpacity,
-                        'font-size': sizeFlake,
-                        color: options.flakeColor
-                    }).animate({
-                        top: endPositionTop,
-                        left: endPositionLeft,
-                        opacity: 0.2
-                    }, durationFall, 'linear', function () {
-                        $(this).remove()
-                    });
-                }, options.newOn);
-            };
-        })(jQuery);
-        $(function () {
-            $.fn.snow({
-                minSize: 5, /* 定义雪花最小尺寸 */
-                maxSize: 50,/* 定义雪花最大尺寸 */
-                newOn: 800  /* 定义密集程度，数字越小越密集 */
-            });
-        });
+                    {
+                        name: '后端框架',
+                        icon: 'ri-leaf-fill',
+                        items: [
+                            { name: 'Spring Boot / Cloud', level: 95, levelName: '精通' },
+                            { name: 'Dubbo / gRPC', level: 85, levelName: '熟练' },
+                            { name: 'MyBatis / JPA', level: 85, levelName: '熟练' },
+                            { name: 'Netty / Vert.x', level: 70, levelName: '掌握' }
+                        ]
+                    },
+                    {
+                        name: '数据存储',
+                        icon: 'ri-database-fill',
+                        items: [
+                            { name: 'MySQL', level: 90, levelName: '精通' },
+                            { name: 'Redis', level: 90, levelName: '精通' },
+                            { name: 'Elasticsearch', level: 75, levelName: '熟练' },
+                            { name: 'MongoDB / ClickHouse', level: 65, levelName: '掌握' }
+                        ]
+                    },
+                    {
+                        name: '中间件与运维',
+                        icon: 'ri-tools-fill',
+                        items: [
+                            { name: 'Kafka / RabbitMQ', level: 85, levelName: '熟练' },
+                            { name: 'Docker / K8s', level: 80, levelName: '熟练' },
+                            { name: 'Jenkins / GitLab CI', level: 75, levelName: '熟练' },
+                            { name: 'Prometheus / Grafana', level: 70, levelName: '掌握' }
+                        ]
+                    }
+                ]);
 
-        // 浏览器搞笑标题
-        var OriginTitle = document.title;
-        var titleTime;
-        document.addEventListener('visibilitychange', function () {
-            if (document.hidden) {
-                // $('[rel="icon"]').attr('href', "/funny.ico");
-                document.title = '╭(°A°`)╮ 页面崩溃啦 ~';
-                clearTimeout(titleTime);
+                // ===== 项目经验 =====
+                const projects = ref([
+                    {
+                        icon: 'ri-shopping-bag-fill',
+                        title: '电商交易系统',
+                        desc: '负责核心交易链路开发，涵盖订单系统、库存管理、支付对接等模块。通过 Redis 缓存优化、异步削峰等手段提升系统性能，保障大促期间系统稳定运行。',
+                        tags: ['Spring Boot', 'MySQL', 'Redis', 'RabbitMQ'],
+                        metrics: [
+                            { value: '10W+', label: '日均订单' },
+                            { value: '99.9%', label: '可用性' }
+                        ]
+                    },
+                    {
+                        icon: 'ri-flashlight-fill',
+                        title: '即时通讯服务',
+                        desc: '基于 Netty 构建的 IM 服务，支持私聊、群聊、消息已读等核心功能。采用 WebSocket 长连接 + 消息队列架构，保证消息实时性和可靠性。',
+                        tags: ['Netty', 'WebSocket', 'Redis', 'Protobuf'],
+                        metrics: [
+                            { value: '5W+', label: '在线用户' },
+                            { value: '20ms', label: '平均延迟' }
+                        ]
+                    },
+                    {
+                        icon: 'ri-search-eye-fill',
+                        title: '风控预警系统',
+                        desc: '实时风控检测系统，支持规则动态配置与热更新。通过规则引擎 + 特征库实现反欺诈、反刷单等场景，有效识别异常行为。',
+                        tags: ['Drools', 'Redis', 'MySQL', '定时任务'],
+                        metrics: [
+                            { value: '1亿+', label: '日检测量' },
+                            { value: '<100ms', label: '响应时间' }
+                        ]
+                    },
+                    {
+                        icon: 'ri-cloud-fill',
+                        title: '微服务基础架构',
+                        desc: '搭建公司微服务基础设施，包括统一网关、配置中心、链路追踪、日志收集等。基于 Spring Cloud Alibaba 体系，支撑业务服务数量持续增长。',
+                        tags: ['Spring Cloud', 'Nacos', 'Sentinel', 'SkyWalking'],
+                        metrics: [
+                            { value: '50+', label: '服务数量' },
+                            { value: '统一治理', label: '运维体系' }
+                        ]
+                    }
+                ]);
+
+                // ===== 工作经历 =====
+                const experience = ref([
+                    { date: '2021 - 至今', title: '高级后端工程师', company: '某成长型互联网公司', desc: '负责核心业务系统架构设计与优化，主导微服务改造，从零搭建监控运维体系' },
+                    { date: '2019 - 2021', title: 'Java 后端工程师', company: '某科技公司', desc: '参与电商平台后端开发，负责订单、支付等核心模块，独立完成多个业务需求' },
+                    { date: '2015 - 2019', title: '计算机科学与技术', company: '某大学 · 本科', desc: '系统学习计算机基础，积极参与技术社区，开源项目贡献者' }
+                ]);
+
+                // ===== 统计数据 =====
+                const stats = ref([
+                    { value: '5', label: '年研发经验' },
+                    { value: '50+', label: '技术博客' },
+                    { value: '100W+', label: '代码行数' },
+                    { value: '--', label: '访客数' }
+                ]);
+
+                // ===== 资源链接 =====
+                const resourceLinks = ref([
+                    { name: 'LeetCode', icon: 'ri-code-box-line', url: 'https://leetcode-cn.com/problemset/all/', desc: '算法训练' },
+                    { name: '剑指 Offer', icon: 'ri-book-open-line', url: 'https://www.nowcoder.com/ta/coding-interviews', desc: '面试宝典' },
+                    { name: 'GitHub', icon: 'ri-github-fill', url: 'https://github.com/', desc: '开源社区' }
+                ]);
+
+                // ===== 动态数据 =====
+                const typedText = ref('');
+                const hitokoto = ref('加载中...');
+                const poetry = ref('加载中...');
+                const currentYear = computed(() => new Date().getFullYear());
+
+                // ===== 可见区域状态 =====
+                const visibleSections = reactive({
+                    about: false, skills: false, projects: false,
+                    experience: false, stats: false, poetry: false, links: false
+                });
+
+                // ===== 打字效果 =====
+                const typeWriter = () => {
+                    const texts = ['架构改变世界', 'Code is Poetry', 'Stay Hungry, Stay Foolish', '高并发 · 高可用 · 高扩展'];
+                    let textIndex = 0, charIndex = 0, isDeleting = false;
+
+                    const type = () => {
+                        const current = texts[textIndex];
+                        typedText.value = isDeleting ? current.substring(0, --charIndex) : current.substring(0, ++charIndex);
+
+                        if (!isDeleting && charIndex === current.length) {
+                            setTimeout(type, 2000);
+                            isDeleting = true;
+                            return;
+                        }
+                        if (isDeleting && charIndex === 0) {
+                            isDeleting = false;
+                            textIndex = (textIndex + 1) % texts.length;
+                        }
+                        setTimeout(type, isDeleting ? 35 : 75);
+                    };
+                    type();
+                };
+
+                // ===== 粒子背景 =====
+                const initParticles = () => {
+                    const canvas = document.getElementById('particles');
+                    if (!canvas) return;
+                    const ctx = canvas.getContext('2d');
+                    let particles = [];
+                    let mouse = { x: null, y: null };
+
+                    const resize = () => {
+                        canvas.width = window.innerWidth;
+                        canvas.height = window.innerHeight;
+                    };
+                    resize();
+                    window.addEventListener('resize', resize);
+                    window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+                    class Particle {
+                        constructor() {
+                            this.x = Math.random() * canvas.width;
+                            this.y = Math.random() * canvas.height;
+                            this.vx = (Math.random() - 0.5) * 0.4;
+                            this.vy = (Math.random() - 0.5) * 0.4;
+                            this.r = Math.random() * 1.5 + 0.5;
+                        }
+                        update() {
+                            this.x += this.vx;
+                            this.y += this.vy;
+                            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                            if (mouse.x && mouse.y) {
+                                const dx = mouse.x - this.x, dy = mouse.y - this.y;
+                                const d = Math.sqrt(dx * dx + dy * dy);
+                                if (d < 100) { this.x -= dx * 0.008; this.y -= dy * 0.008; }
+                            }
+                        }
+                        draw() {
+                            ctx.beginPath();
+                            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                            ctx.fillStyle = 'rgba(88, 166, 255, 0.5)';
+                            ctx.fill();
+                        }
+                    }
+
+                    const init = () => {
+                        const count = Math.min(50, Math.floor(canvas.width * canvas.height / 20000));
+                        for (let i = 0; i < count; i++) particles.push(new Particle());
+                    };
+
+                    const animate = () => {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        particles.forEach(p => { p.update(); p.draw(); });
+                        for (let i = 0; i < particles.length; i++) {
+                            for (let j = i + 1; j < particles.length; j++) {
+                                const dx = particles[i].x - particles[j].x;
+                                const dy = particles[i].y - particles[j].y;
+                                const d = Math.sqrt(dx * dx + dy * dy);
+                                if (d < 80) {
+                                    ctx.beginPath();
+                                    ctx.moveTo(particles[i].x, particles[i].y);
+                                    ctx.lineTo(particles[j].x, particles[j].y);
+                                    ctx.strokeStyle = `rgba(88, 166, 255, ${0.12 - d / 700})`;
+                                    ctx.stroke();
+                                }
+                            }
+                        }
+                        requestAnimationFrame(animate);
+                    };
+                    init();
+                    animate();
+                };
+
+                // ===== 滚动监听 =====
+                const initScrollObserver = () => {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            const id = entry.target.id;
+                            if (id && visibleSections.hasOwnProperty(id)) {
+                                visibleSections[id] = entry.isIntersecting;
+                            }
+                        });
+                    }, { threshold: 0.15 });
+
+                    document.querySelectorAll('.section').forEach(section => {
+                        observer.observe(section);
+                    });
+                };
+
+                // ===== 加载外部数据 =====
+                const loadExternalData = () => {
+                    // 一言
+                    fetch('https://v1.hitokoto.cn')
+                        .then(r => r.json())
+                        .then(d => { hitokoto.value = d.hitokoto + ' —— ' + (d.from || ''); })
+                        .catch(() => { hitokoto.value = '代码如诗，人生如歌。'; });
+
+                    // 诗词
+                    const js = document.createElement('script');
+                    js.src = 'https://sdk.jinrishici.com/v2/browser/jinrishici.js';
+                    js.onload = () => {
+                        jinrishici.load(r => { poetry.value = r.data.content; });
+                    };
+                    document.body.appendChild(js);
+
+                    // 访客统计
+                    const bs = document.createElement('script');
+                    bs.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+                    bs.async = true;
+                    document.body.appendChild(bs);
+                };
+
+                onMounted(() => {
+                    typeWriter();
+                    initParticles();
+                    initScrollObserver();
+                    loadExternalData();
+
+                    // 标签页切换
+                    document.addEventListener('visibilitychange', () => {
+                        document.title = document.hidden ? '(๑•́ ₃•̀) 页面走丢了' : `${site.name} | Senior Backend Engineer`;
+                    });
+
+                    console.log(`%c⚡ ${site.name} - 探索未知`, 'color:#58a6ff;font-size:16px;font-weight:bold');
+                });
+
+                return {
+                    site, navLinks, profile, socialLinks, about, skills, projects,
+                    experience, stats, resourceLinks, typedText, hitokoto, poetry,
+                    currentYear, visibleSections
+                };
             }
-            else {
-                $('[rel="icon"]').attr('href', "/favicon.ico");
-                document.title = '(ฅ>ω<*ฅ) 噫又好啦 ~' + OriginTitle;
-                titleTime = setTimeout(function () {
-                    document.title = OriginTitle;
-                }, 2000);
-            }
-        });
+        }).mount('#app');
     </script>
 </body>
 
