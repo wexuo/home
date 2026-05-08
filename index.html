@@ -8,14 +8,15 @@
     <meta name="description" content="资深后端工程师，专注于高并发、分布式系统架构设计">
     <meta name="keywords" content="Java,Go,Python,微服务,分布式,架构师">
     <meta name="theme-color" content="#0d1117">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="static/img/avatar.svg">
+    <link rel="alternate icon" href="favicon.ico">
     <link rel="stylesheet" href="static/css/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
 </head>
 
 <body>
     <div id="app">
-        <canvas ref="particles"></canvas>
+        <canvas id="particles"></canvas>
         <div class="glow-orb orb-1"></div>
         <div class="glow-orb orb-2"></div>
 
@@ -148,7 +149,7 @@
                 <section id="stats" class="section section-stats" :class="{ visible: visibleSections.stats }">
                     <div class="stats-grid">
                         <div v-for="stat in stats" :key="stat.label" class="stat-item">
-                            <div class="stat-number">{{ stat.value }}</div>
+                            <div class="stat-number" :id="stat.id || null">{{ stat.value }}</div>
                             <div class="stat-label">{{ stat.label }}</div>
                         </div>
                     </div>
@@ -234,7 +235,7 @@
                 // ===== 个人信息 =====
                 const profile = reactive({
                     name: '未寻',
-                    avatar: 'https://cdn.jsdelivr.net/gh/laoxuai/assert/images/20200125221102.png',
+                    avatar: 'static/img/avatar.svg',
                     title: 'Senior Backend Engineer · System Architect',
                     bio: '专注于高并发、高可用分布式系统架构设计，深耕 Java 生态，拥抱云原生技术'
                 });
@@ -361,7 +362,7 @@
                     { value: '5', label: '年研发经验' },
                     { value: '50+', label: '技术博客' },
                     { value: '100W+', label: '代码行数' },
-                    { value: '--', label: '访客数' }
+                    { value: '', label: '访客数', id: 'busuanzi_value_site_uv' }
                 ]);
 
                 // ===== 资源链接 =====
@@ -426,9 +427,10 @@
                         constructor() {
                             this.x = Math.random() * canvas.width;
                             this.y = Math.random() * canvas.height;
-                            this.vx = (Math.random() - 0.5) * 0.4;
-                            this.vy = (Math.random() - 0.5) * 0.4;
-                            this.r = Math.random() * 1.5 + 0.5;
+                            this.vx = (Math.random() - 0.5) * 0.6;
+                            this.vy = (Math.random() - 0.5) * 0.6;
+                            this.r = Math.random() * 2 + 1;
+                            this.color = Math.random() > 0.5 ? '88, 166, 255' : '163, 113, 247';
                         }
                         update() {
                             this.x += this.vx;
@@ -438,19 +440,22 @@
                             if (mouse.x && mouse.y) {
                                 const dx = mouse.x - this.x, dy = mouse.y - this.y;
                                 const d = Math.sqrt(dx * dx + dy * dy);
-                                if (d < 100) { this.x -= dx * 0.008; this.y -= dy * 0.008; }
+                                if (d < 150) { this.x -= dx * 0.01; this.y -= dy * 0.01; }
                             }
                         }
                         draw() {
                             ctx.beginPath();
                             ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-                            ctx.fillStyle = 'rgba(88, 166, 255, 0.5)';
+                            ctx.fillStyle = `rgba(${this.color}, 0.8)`;
+                            ctx.shadowBlur = 10;
+                            ctx.shadowColor = `rgba(${this.color}, 0.5)`;
                             ctx.fill();
+                            ctx.shadowBlur = 0;
                         }
                     }
 
                     const init = () => {
-                        const count = Math.min(50, Math.floor(canvas.width * canvas.height / 20000));
+                        const count = Math.min(80, Math.floor(canvas.width * canvas.height / 15000));
                         for (let i = 0; i < count; i++) particles.push(new Particle());
                     };
 
@@ -462,11 +467,18 @@
                                 const dx = particles[i].x - particles[j].x;
                                 const dy = particles[i].y - particles[j].y;
                                 const d = Math.sqrt(dx * dx + dy * dy);
-                                if (d < 80) {
+                                if (d < 120) {
+                                    const gradient = ctx.createLinearGradient(
+                                        particles[i].x, particles[i].y,
+                                        particles[j].x, particles[j].y
+                                    );
+                                    gradient.addColorStop(0, `rgba(${particles[i].color}, ${0.4 - d / 300})`);
+                                    gradient.addColorStop(1, `rgba(${particles[j].color}, ${0.4 - d / 300})`);
                                     ctx.beginPath();
                                     ctx.moveTo(particles[i].x, particles[i].y);
                                     ctx.lineTo(particles[j].x, particles[j].y);
-                                    ctx.strokeStyle = `rgba(88, 166, 255, ${0.12 - d / 700})`;
+                                    ctx.strokeStyle = gradient;
+                                    ctx.lineWidth = 0.8;
                                     ctx.stroke();
                                 }
                             }

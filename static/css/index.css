@@ -28,22 +28,24 @@ body {
 }
 
 /* ===== Particles ===== */
-#particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+#particles { position: fixed; inset: 0; z-index: 0; }
 
 /* ===== Glow Orbs ===== */
 .glow-orb {
     position: fixed;
     border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.35;
+    filter: blur(100px);
+    opacity: 0.4;
     z-index: 0;
-    animation: float 30s ease-in-out infinite;
+    animation: float 25s ease-in-out infinite;
+    pointer-events: none;
 }
-.orb-1 { width: 400px; height: 400px; background: var(--glow); top: -80px; right: -80px; }
-.orb-2 { width: 300px; height: 300px; background: rgba(163, 113, 247, 0.15); bottom: 15%; left: -60px; animation-delay: -10s; }
+.orb-1 { width: 500px; height: 500px; background: rgba(88, 166, 255, 0.15); top: -150px; right: -150px; }
+.orb-2 { width: 400px; height: 400px; background: rgba(163, 113, 247, 0.12); bottom: 10%; left: -100px; animation-delay: -10s; }
 @keyframes float {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(25px, -25px); }
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -20px) scale(1.05); }
+    66% { transform: translate(-20px, 20px) scale(0.95); }
 }
 
 /* ===== App ===== */
